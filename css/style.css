@@ -80,24 +80,31 @@ section#title div div{
     overflow: hidden;
 }
 
-/* 1. En móviles, obligamos a la caja a tener una altura fija sobrada */
+.carousel-item {
+  /*  De 550px a 600px para dar más aire en Hub Max/Laptops */
+  min-height: 600px; 
+}
+
+.carousel-item > div {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+/* 2. Regla MÓVIL (Sobreescribe la base cuando la pantalla es chica) */
 @media (max-width: 991px) {
-  /* En lugar de al contenedor, se lo damos a cada item individual */
   .carousel-item {
-    /* Altura fija suficiente para que entre foto + texto largo + gaps */
+    /* En celular el texto se apila, así que necesitamos MÁS altura */
     min-height: 700px; 
+  }
+}
+
+.carousel-item h2 {
+    /* Reserva espacio suficiente para 3 líneas de texto siempre */
+    min-height: 120px; 
     
-    /* Centrado vertical "a la fuerza" para que si sobra espacio, quede lindo */
-    /* Usamos flex aquí porque el item es lo que contiene la info */
-    /* OJO: Bootstrap usa display:block/none, pero cuando es 'active' es block. 
-       Para no romperlo, usaremos un truco con flex dentro del contenido */
-  }
-  
-  /* Esto asegura que el contenido dentro del item ocupe toda esa altura */
-  .carousel-item > div {
-     min-height: 100%;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-  }
+    /* Centra el texto en ese espacio reservado */
+    display: flex;
+    align-items: center; 
+    justify-content: center;
 }
